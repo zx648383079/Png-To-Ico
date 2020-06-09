@@ -29,14 +29,14 @@
         <TextBlock x:Name="SrcTb" Grid.Column="1"/>
         <Button x:Name="ChooseBtn" Content="选择" Grid.Column="2" Click="ChooseBtn_Click"/>
         <TextBlock Text="尺寸：" Grid.Row="1"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            <CheckBox Content="16"/>
+        <StackPanel x:Name="SizeBox" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <CheckBox Content="16" IsChecked="True"/>
             <CheckBox Content="24"/>
-            <CheckBox Content="32"/>
+            <CheckBox Content="32" IsChecked="True"/>
             <CheckBox Content="48"/>
-            <CheckBox Content="64"/>
-            <CheckBox Content="128"/>
-            <CheckBox Content="256"/>
+            <CheckBox Content="64" IsChecked="True"/>
+            <CheckBox Content="128" IsChecked="True"/>
+            <CheckBox Content="256" IsChecked="True"/>
             <CheckBox Content="512"/>
         </StackPanel>
         <Button x:Name="SaveBtn" Grid.Row="2" Grid.Column="2" Content="转换" Click="SaveBtn_Click" IsEnabled="False"/>
