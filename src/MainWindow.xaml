@@ -12,6 +12,7 @@
         </Style>
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -26,7 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="路径："/>
-        <TextBlock x:Name="SrcTb" Grid.Column="1"/>
+        <TextBlock x:Name="SrcTb" Grid.Column="1" Text="...请选择文件"/>
         <Button x:Name="ChooseBtn" Content="选择" Grid.Column="2" Click="ChooseBtn_Click"/>
         <TextBlock Text="尺寸：" Grid.Row="1"/>
         <StackPanel x:Name="SizeBox" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
@@ -39,6 +40,13 @@
             <CheckBox Content="256" IsChecked="True"/>
             <CheckBox Content="512"/>
         </StackPanel>
+
+        <TextBlock Text="画质：" Grid.Row="2"/>
+        <ComboBox x:Name="QualityCb" Grid.Row="2" Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Left" VerticalContentAlignment="Center">
+            <ComboBoxItem Content="高画质"/>
+            <ComboBoxItem Content="默认画质"/>
+            <ComboBoxItem Content="低画质"/>
+        </ComboBox>
         <Button x:Name="SaveBtn" Grid.Row="2" Grid.Column="2" Content="转换" Click="SaveBtn_Click" IsEnabled="False"/>
     </Grid>
 </Window>

@@ -77,49 +77,17 @@ namespace PngToIco
             {
                 if (sizes.Count > 0)
                 {
-                    Ico.Converter(images, sizes.ToArray(), fs);
+                    Ico.Converter(images, sizes.ToArray(), GetQuality(), fs);
                 } else
                 {
                     Ico.Converter(images, fs);
                 }
-                
+            }
+            foreach (var item in images)
+            {
+                item.Dispose();
             }
             MessageBox.Show("转换完成");
-        }
-
-        public static Bitmap ImageCorrection(Bitmap image)
-        {
-            var dispose = false;
-            try
-            {
-                var img = image;
-                if (!img.PixelFormat.Equals(System.Drawing.Imaging.PixelFormat.Format32bppArgb))
-                {
-                    var bitmap = new Bitmap(img.Width, img.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-                    using (var g = Graphics.FromImage(bitmap))
-                        g.DrawImage(img, new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height));
-                    img = bitmap;
-                }
-                if (!img.RawFormat.Guid.Equals(ImageFormat.Png.Guid))
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        img.Save(ms, ImageFormat.Png);
-                        ms.Position = 0;
-                        img = (Bitmap)Bitmap.FromStream(ms);
-                    }
-                } 
-                if (image != img)
-                {
-                    dispose = true;
-                }
-                return img;
-            }
-            finally
-            {
-                if (dispose)
-                    image?.Dispose();
-            }
         }
 
         private List<Bitmap> CreateImages()
@@ -130,6 +98,19 @@ namespace PngToIco
                 data.Add(new Bitmap(item));
             }
             return data;
+        }
+
+        private SmoothingMode GetQuality()
+        {
+            switch (QualityCb.SelectedIndex)
+            {
+                case 1:
+                    return SmoothingMode.Default;
+                case 2:
+                    return SmoothingMode.HighSpeed;
+                default:
+                    return SmoothingMode.HighQuality;
+            }
         }
 
         private List<int> GetSizes()
